@@ -2,39 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Travel Planner Design System - Professional & Modern */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Theme - Ocean & Travel Inspired */
+    --background: 210 20% 98%;
+    --foreground: 210 15% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 15% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 15% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Ocean Blue */
+    --primary: 205 85% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 205 85% 55%;
+    --primary-dark: 205 85% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Warm Coral */
+    --secondary: 15 85% 65%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 15 85% 75%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent - Turquoise */
+    --accent: 180 75% 55%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 180 75% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Neutral Tones */
+    --muted: 210 15% 95%;
+    --muted-foreground: 210 10% 45%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 20% 90%;
+    --input: 210 20% 95%;
+    --ring: 205 85% 45%;
+
+    /* Travel Specific Colors */
+    --travel-gold: 45 90% 60%;
+    --travel-forest: 140 40% 35%;
+    --travel-sunset: 25 95% 65%;
+    --travel-sky: 195 100% 85%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(205 85% 45%), hsl(180 75% 55%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 20% 98%));
+    --gradient-accent: linear-gradient(135deg, hsl(15 85% 65%), hsl(25 95% 65%));
+
+    /* Shadows */
+    --shadow-soft: 0 2px 10px hsl(210 15% 12% / 0.1);
+    --shadow-medium: 0 4px 20px hsl(210 15% 12% / 0.15);
+    --shadow-large: 0 8px 40px hsl(210 15% 12% / 0.2);
+    --shadow-travel: 0 4px 20px hsl(205 85% 45% / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
@@ -100,6 +128,96 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  /* Hero Section */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+  
+  .accent-gradient {
+    background: var(--gradient-accent);
+  }
+
+  /* Travel Card Effects */
+  .travel-card {
+    @apply bg-card rounded-xl p-6 shadow-[var(--shadow-soft)] 
+           hover:shadow-[var(--shadow-travel)] transition-[var(--transition-smooth)]
+           hover:-translate-y-1;
+  }
+  
+  .travel-card-featured {
+    @apply travel-card border border-primary/20 bg-gradient-to-br from-white to-primary/5;
+  }
+
+  /* Button Variants */
+  .btn-hero {
+    @apply bg-primary hover:bg-primary-light text-primary-foreground 
+           shadow-[var(--shadow-travel)] hover:shadow-[var(--shadow-large)]
+           transform hover:scale-105 transition-[var(--transition-bounce)];
+  }
+  
+  .btn-secondary-travel {
+    @apply bg-secondary hover:bg-secondary-light text-secondary-foreground
+           shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)]
+           transition-[var(--transition-smooth)];
+  }
+  
+  .btn-accent-travel {
+    @apply bg-accent hover:bg-accent-light text-accent-foreground
+           transition-[var(--transition-smooth)];
+  }
+
+  /* Search Form Styling */
+  .search-form-container {
+    @apply bg-white/95 backdrop-blur-sm rounded-2xl shadow-[var(--shadow-large)] p-8;
+  }
+  
+  /* Typography */
+  .heading-hero {
+    @apply text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent;
+  }
+  
+  .heading-section {
+    @apply text-2xl md:text-3xl font-bold text-foreground;
+  }
+  
+  /* Status Indicators */
+  .status-success {
+    @apply bg-green-50 text-green-800 border border-green-200;
+  }
+  
+  .status-warning {
+    @apply bg-amber-50 text-amber-800 border border-amber-200;
+  }
+  
+  .status-error {
+    @apply bg-red-50 text-red-800 border border-red-200;
+  }
+
+  /* Price Display */
+  .price-display {
+    @apply text-2xl font-bold text-primary;
+  }
+  
+  .price-currency {
+    @apply text-lg text-muted-foreground font-medium;
+  }
+
+  /* Loading Animation */
+  @keyframes pulse-travel {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  .loading-travel {
+    animation: pulse-travel 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 }
